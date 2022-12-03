@@ -22,7 +22,7 @@ export default function CoinTable() {
 
   useEffect(() => {
     const getJSON = async function () {
-      console.log("called afrter 5s");
+      console.log("called after 5s");
       try {
         let apiResponse = await getTopTenCoins();
         setCoinData(apiResponse);
@@ -32,9 +32,9 @@ export default function CoinTable() {
     };
 
     if (getTopTenCoins) getJSON();
-    const time = setInterval(() => {
-      getJSON();
-    }, 5 * 1000);
+    // const time = setInterval(() => {
+    //   getJSON();
+    // }, 5 * 1000);
   }, []);
   return (
     <section className="text-gray-100 bg-body">
@@ -65,24 +65,20 @@ export default function CoinTable() {
                           {coin.name}
                         </Link>
                         &nbsp;
-                        <i className=" not-italic text-gray-600 text-xs">
-                          {coin.symbol}
-                        </i>
+                        <i className=" not-italic text-gray-600 text-xs">{coin.symbol}</i>
                       </span>
                     </DataCellLeading>
                     <DataCell>${formatNum(coin.quote.USD.price)}</DataCell>
-                    <DataCell>
+                    <DataCell increment={coin.quote.USD.percent_change_24h > 0 ? true : false}>
                       {formatNum(coin.quote.USD.percent_change_24h)}%
                     </DataCell>
-                    <DataCell>
+                    <DataCell increment={coin.quote.USD.percent_change_7d > 0 ? true : false}>
                       {formatNum(coin.quote.USD.percent_change_7d)}%
                     </DataCell>
                     <DataCell>${formatNum(coin.quote.USD.market_cap)}</DataCell>
                     <DataCell>${formatNum(coin.quote.USD.volume_24h)}</DataCell>
                     <DataCell>${formatNum(coin.total_supply)}</DataCell>
-                    <DataCell>
-                      {formatNum(coin.quote.USD.volume_change_24h)}%
-                    </DataCell>
+                    <DataCell>{formatNum(coin.quote.USD.volume_change_24h)}%</DataCell>
                   </TableRow>
                 );
               })}

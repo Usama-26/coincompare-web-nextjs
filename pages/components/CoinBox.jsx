@@ -2,10 +2,9 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { DataCell, DataCellLeading, HeaderCell, Table, TableBody, TableHead, TableRow } from "./Table";
+import CoinDetails from "./CoinDetails";
 
-import { CoinMarketContext } from "../../context/context";
-
-export default function ComboBox({ data }) {
+export default function CoinBox({ data }) {
   const [selected, setSelected] = useState(data[0]);
   const [query, setQuery] = useState("");
 
@@ -15,15 +14,16 @@ export default function ComboBox({ data }) {
       : data.filter((coin) =>
           coin.name.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
         );
+
   return (
     <>
-      <div className="w-72 mx-auto my-10">
+      <div className="w-72 mx-auto">
         <Combobox value={selected} onChange={setSelected}>
           <div className="relative mt-1">
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-                displayValue={(coin) => (coin ? coin.name : "Select")}
+                displayValue={(coin) => (coin ? coin.name : "Select Coin")}
                 onChange={(event) => setQuery(event.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

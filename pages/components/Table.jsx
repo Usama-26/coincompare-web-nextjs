@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatNum } from "./section-components/CoinTable";
 
 function HeaderCell(props) {
@@ -32,13 +32,15 @@ function DataCellLeading(props) {
   );
 }
 
-function DataCell({ children }) {
+function DataCell({ increment, children }) {
   const [isIncrement, setIsIncrement] = useState(false);
 
   return (
     <td
       className={`py-4 px-6 text-gray-200 text-right font-semibold ${
-        isIncrement ? "bg-green-500/25" : "bg-red-500/25"
+        (increment === undefined && "") ||
+        (increment === true && "bg-green-500/25") ||
+        (increment === false && "bg-red-500/25")
       }`}
     >
       {children}

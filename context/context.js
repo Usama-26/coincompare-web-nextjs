@@ -168,8 +168,6 @@ export const CoinMarketProvider = ({ children }) => {
     }
   };
 
-  console.log(process.env);
-
   // const authLogin = async (value) => {
   //   try {
   //     const res = await fetch("http://localhost:4000/auth/login", {

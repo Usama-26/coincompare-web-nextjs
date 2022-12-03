@@ -5,9 +5,7 @@ import Header from "./components/section-components/Header";
 import CoinTable from "./components/section-components/CoinTable";
 import Hero from "./components/section-components/Hero";
 import { ThemeProvider } from "@material-tailwind/react";
-import Compare from "./components/Compare";
-import { QueryClientProvider } from "react-query";
-import { QueryClient } from "react-query";
+import Compare from "./Compare";
 
 export default function Home() {
   useEffect(() => {
@@ -30,21 +28,20 @@ export default function Home() {
     localStorage.removeItem("theme");
   });
 
-  const queryClient = new QueryClient();
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <CoinMarketProvider>
-            <div id="page" className="bg-body">
-              <Header />
-              <Hero />
-              {/* <Compare /> */}
-              <CoinTable />
-            </div>
-          </CoinMarketProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <CoinMarketProvider>
+          <div id="page" className="bg-body">
+            <Header />
+            <Compare />
+
+            {/* <Hero /> */}
+            {/* <Compare /> */}
+            <CoinTable />
+          </div>
+        </CoinMarketProvider>
+      </ThemeProvider>
     </>
   );
 }
