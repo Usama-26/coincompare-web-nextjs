@@ -7,7 +7,7 @@
   font-weight: 400;
   background-color: #111827;
 }
-#table {
+* {
   scrollbar-width: none;
 }
 

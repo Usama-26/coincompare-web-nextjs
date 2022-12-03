@@ -4,17 +4,18 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { DataCell, DataCellLeading, HeaderCell, Table, TableBody, TableHead, TableRow } from "./Table";
 import CoinDetails from "./CoinDetails";
 
-export default function CoinBox({ data }) {
-  const [selected, setSelected] = useState(data[0]);
+export default function CoinBox({ data, getSelectedCoin }) {
+  const [selected, setSelected] = useState(undefined);
   const [query, setQuery] = useState("");
-
+  useEffect(() => {
+    selected && getSelectedCoin(selected);
+  }, [selected]);
   const filteredCoins =
     query === ""
       ? data
       : data.filter((coin) =>
           coin.name.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
         );
-
   return (
     <>
       <div className="w-72 mx-auto">
@@ -24,6 +25,7 @@ export default function CoinBox({ data }) {
               <Combobox.Input
                 className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
                 displayValue={(coin) => (coin ? coin.name : "Select Coin")}
+                placeholder="Select Coin"
                 onChange={(event) => setQuery(event.target.value)}
               />
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

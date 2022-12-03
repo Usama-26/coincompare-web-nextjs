@@ -10,7 +10,7 @@ import Compare from "./Compare";
 export default function Home() {
   useEffect(() => {
     if (
-      localStorage.theme === "dark" ||
+      localStorage.theme === "light" ||
       (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.documentElement.classList.add("dark");
@@ -37,8 +37,8 @@ export default function Home() {
             <Compare />
 
             {/* <Hero /> */}
-            {/* <Compare /> */}
-            <CoinTable />
+
+            {/* <CoinTable /> */}
           </div>
         </CoinMarketProvider>
       </ThemeProvider>
