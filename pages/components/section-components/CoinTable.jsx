@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CoinMarketContext } from "../../../context/context";
 
 import {
@@ -17,14 +17,36 @@ export const formatNum = (num) => {
   return Number(num.toFixed(2)).toLocaleString();
 };
 export default function CoinTable() {
+  var coinsdata = useRef([]);
   let { getTopTenCoins } = useContext(CoinMarketContext);
   let [coinData, setCoinData] = useState([]);
+  let [previousCoinData, setPreviousCoinData] = useState([]);
+  const handlePrice = (value) => {
+    let isIncrement = undefined;
+    if (previousCoinData.length > 0) {
+      if (
+        formatNum(coinData[value].quote.USD.price) <
+        formatNum(previousCoinData[value].quote.USD.price)
+      ) {
+        console.log("decrement");
+        isIncrement = false;
+      } else if (
+        formatNum(coinData[value].quote.USD.price) >
+        formatNum(previousCoinData[value].quote.USD.price)
+      ) {
+        console.log("increment");
+        isIncrement = true;
+      } else {
+      }
+    }
 
+    return { isIncrement, value: formatNum(coinData[value].quote.USD.price) };
+  };
   useEffect(() => {
     const getJSON = async function () {
-      console.log("called afrter 5s");
       try {
         let apiResponse = await getTopTenCoins();
+        setPreviousCoinData(coinsdata.current);
         setCoinData(apiResponse);
       } catch (e) {
         console.error(e.message);
@@ -34,8 +56,12 @@ export default function CoinTable() {
     if (getTopTenCoins) getJSON();
     const time = setInterval(() => {
       getJSON();
-    }, 5 * 1000);
+    }, 20 * 1000);
   }, []);
+  useEffect(() => {
+    coinsdata.current = coinData;
+  }, [coinData]);
+
   return (
     <section className="text-gray-100 bg-body">
       <div className="containermx-auto flex py-20 md:flex-row flex-col items-center">
@@ -70,7 +96,9 @@ export default function CoinTable() {
                         </i>
                       </span>
                     </DataCellLeading>
-                    <DataCell>${formatNum(coin.quote.USD.price)}</DataCell>
+                    <DataCell isIncrement={handlePrice(index).isIncrement}>
+                      ${formatNum(coin.quote.USD.price)}
+                    </DataCell>
                     <DataCell>
                       {formatNum(coin.quote.USD.percent_change_24h)}%
                     </DataCell>

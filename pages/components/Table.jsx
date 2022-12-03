@@ -32,13 +32,15 @@ function DataCellLeading(props) {
   );
 }
 
-function DataCell({ children }) {
-  const [isIncrement, setIsIncrement] = useState(false);
+function DataCell({ isIncrement, children }) {
+  //const [isIncrement, setIsIncrement] = useState(false);
 
   return (
     <td
       className={`py-4 px-6 text-gray-200 text-right font-semibold ${
-        isIncrement ? "bg-green-500/25" : "bg-red-500/25"
+        (isIncrement === undefined && "") ||
+        (isIncrement === true && "bg-green-500/25") ||
+        (isIncrement === false && "bg-red-500/25")
       }`}
     >
       {children}
