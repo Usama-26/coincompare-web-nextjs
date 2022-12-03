@@ -22,6 +22,7 @@ export default function CoinTable() {
 
   useEffect(() => {
     const getJSON = async function () {
+      console.log("called afrter 5s");
       try {
         let apiResponse = await getTopTenCoins();
         setCoinData(apiResponse);
@@ -29,8 +30,12 @@ export default function CoinTable() {
         console.error(e.message);
       }
     };
+
     if (getTopTenCoins) getJSON();
-  }, [getTopTenCoins]);
+    const time = setInterval(() => {
+      getJSON();
+    }, 5 * 1000);
+  }, []);
   return (
     <section className="text-gray-100 bg-body">
       <div className="containermx-auto flex py-20 md:flex-row flex-col items-center">
@@ -50,7 +55,7 @@ export default function CoinTable() {
               </TableHeadRow>
             </TableHead>
             <TableBody>
-              {coinData.map((coin, index) => {
+              {coinData?.map((coin, index) => {
                 return (
                   <TableRow key={index}>
                     <DataCell>{coin.cmc_rank}</DataCell>
@@ -59,16 +64,25 @@ export default function CoinTable() {
                         <Link href={"/"} className="hover:text-purple-400">
                           {coin.name}
                         </Link>
-                        &nbsp;<i className=" not-italic text-gray-600 text-xs">{coin.symbol}</i>
+                        &nbsp;
+                        <i className=" not-italic text-gray-600 text-xs">
+                          {coin.symbol}
+                        </i>
                       </span>
                     </DataCellLeading>
                     <DataCell>${formatNum(coin.quote.USD.price)}</DataCell>
-                    <DataCell>{formatNum(coin.quote.USD.percent_change_24h)}%</DataCell>
-                    <DataCell>{formatNum(coin.quote.USD.percent_change_7d)}%</DataCell>
+                    <DataCell>
+                      {formatNum(coin.quote.USD.percent_change_24h)}%
+                    </DataCell>
+                    <DataCell>
+                      {formatNum(coin.quote.USD.percent_change_7d)}%
+                    </DataCell>
                     <DataCell>${formatNum(coin.quote.USD.market_cap)}</DataCell>
                     <DataCell>${formatNum(coin.quote.USD.volume_24h)}</DataCell>
                     <DataCell>${formatNum(coin.total_supply)}</DataCell>
-                    <DataCell>{formatNum(coin.quote.USD.volume_change_24h)}%</DataCell>
+                    <DataCell>
+                      {formatNum(coin.quote.USD.volume_change_24h)}%
+                    </DataCell>
                   </TableRow>
                 );
               })}
