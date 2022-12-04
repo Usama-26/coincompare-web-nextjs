@@ -70,7 +70,7 @@ function Table(props) {
   return (
     <div
       id="table"
-      className="container max-w-screen-2xl overflow-y-auto h-[750px] mx-auto overflow-x-auto relative shadow-md  border border-gray-700"
+      className="container max-w-screen-2xl overflow-y-auto h-[750px] mx-auto overflow-x-auto relative shadow-md  border border-blue-gray-800"
     >
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-4000">{props.children}</table>
     </div>

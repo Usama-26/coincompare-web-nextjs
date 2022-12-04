@@ -4,16 +4,24 @@ import { CoinMarketContext } from "../context/context";
 import CoinSelectBox from "./components/CoinSelectBox";
 import CoinDetails from "./components/CoinDetails";
 import { DataCellLeading, HeaderCellLeading, Table, TableBody, TableHead, TableRow } from "./components/Table";
-import CoinTable from "./components/section-components/CoinTable";
 import { Tooltip } from "flowbite-react";
 
 function Compare() {
   let { getTopTenCoins } = useContext(CoinMarketContext);
   let [coinData, setCoinData] = useState([]);
-  let [comboBoxArray, setComboBoxArray] = useState([0, 1]);
-  let [selected, setSelected] = useState([]);
-  let [count, setCount] = useState(0);
-  let i = 2;
+  let [selectedFirst, setSelectedFirst] = useState([]);
+  let [selectedSecond, setSelectedSecond] = useState([]);
+  let [selectedThird, setSelectedThird] = useState([]);
+  let [selectedFourth, setSelectedFourth] = useState([]);
+  let [showThird, setShowThird] = useState(false);
+  let [showFourth, setShowFourth] = useState(false);
+
+  // ##### FAULTY CODE ##### //
+  // let [comboBoxArray, setComboBoxArray] = useState([0, 1]);
+  // let [selected, setSelected] = useState([]);
+  // let [count, setCount] = useState(0);
+  // let i = 2;
+
   useEffect(() => {
     const getJSON = async function () {
       try {
@@ -26,20 +34,21 @@ function Compare() {
     if (getTopTenCoins) getJSON();
   }, [getTopTenCoins]);
 
-  const handleAdd = () => {
-    // setCount(count++);
-    setComboBoxArray((prevArr) => [...prevArr, i]);
-    i = i + 1;
-    console.log(i, comboBoxArray);
-  };
-  // console.log("selected:", selected);
+  // ##### FAULTY CODE #####
+  // const handleAdd = () => {
+  //   // setCount(count++);
+  //   setComboBoxArray((prevArr) => [...prevArr, i]);
+  //   i = i + 1;
+  //   console.log(i, comboBoxArray);
+  // };
+  // // console.log("selected:", selected);
 
-  function checkSelectedCoin(selectedCoin) {
-    // let existing = selected.findIndex((coin) => coin.id === selectedCoin.id);
-    // console.log(existing);
-    // if (existing >= 0) setSelected((prevState) => prevState.splice(existing,1, selectedCoin));
-    setSelected((prevState) => [...prevState, selectedCoin]);
-  }
+  // function checkSelectedCoin(selectedCoin) {
+  //   // let existing = selected.findIndex((coin) => coin.id === sel=ectedCoin.id);
+  //   // console.log(existing);
+  //   // if (existing >= 0) setSelected((prevState) => prevState.splice(existing,1, selectedCoin));
+  //   setSelected((prevState) => [...prevState, selectedCoin]);
+  // }
 
   return (
     <section id="compareCoin" className="text-gray-100">
@@ -48,17 +57,65 @@ function Compare() {
       </div>
       <div className="container mx-auto">
         <div className="mx-auto flex px-10 py-24 md:flex-row flex-wrap gap-6 justify-center items-center ">
-          {comboBoxArray.map((num) => (
+          {/* ##### FAULTY CODE ##### */}
+          {/* {comboBoxArray.map((num) => (
             <CoinSelectBox key={num} data={coinData} getSelectedCoin={checkSelectedCoin} />
-          ))}
-          <Tooltip content={"Add Coin"} arrow={false}>
+          ))} */}
+          <CoinSelectBox
+            data={coinData}
+            getSelectedCoin={(selectedCoin) => setSelectedFirst((prevState) => [selectedCoin])}
+          />
+          <CoinSelectBox
+            data={coinData}
+            getSelectedCoin={(selectedCoin) => setSelectedSecond((prevState) => [selectedCoin])}
+          />
+          {showThird && (
+            <CoinSelectBox
+              data={coinData}
+              getSelectedCoin={(selectedCoin) => setSelectedThird((prevState) => [selectedCoin])}
+            />
+          )}
+          {showFourth && (
+            <CoinSelectBox
+              data={coinData}
+              getSelectedCoin={(selectedCoin) => setSelectedFourth((prevState) => [selectedCoin])}
+            />
+          )}
+
+          <Tooltip content="Add Coin to Compare">
             <Button
-              onClick={handleAdd}
               variant="gradient"
-              disabled={comboBoxArray.length === 4 && true}
               color="purple"
               size="md"
-              className="capitalize mx-auto rounded-full"
+              className={`capitalize mx-auto ${showThird ? "hidden" : ""} rounded-full`}
+              onClick={() => setShowThird(true)}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="#ffffff"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </span>
+            </Button>
+          </Tooltip>
+          <Tooltip content="Add Coin to Compare">
+            <Button
+              variant="gradient"
+              color="purple"
+              size="md"
+              className={`capitalize mx-auto ${showFourth ? "hidden" : ""} rounded-full`}
+              onClick={() => setShowFourth(true)}
             >
               <span>
                 <svg
@@ -80,8 +137,9 @@ function Compare() {
             </Button>
           </Tooltip>
         </div>
-        {selected.length > 0 && (
-          <div className="w-full flex overflow-x-scroll">
+
+        {selectedFirst.length > 0 && selectedSecond.length > 0 && (
+          <div className="w-full flex">
             <Table>
               <TableHead>
                 <HeaderCellLeading>Properties</HeaderCellLeading>
@@ -128,9 +186,20 @@ function Compare() {
                 </TableRow>
               </TableBody>
             </Table>
-            {selected.map((coin, index) => {
+            {selectedFirst.map((coin, index) => {
               return <CoinDetails key={index} data={coin} />;
             })}
+            {selectedSecond.map((coin, index) => {
+              return <CoinDetails key={index} data={coin} />;
+            })}
+            {selectedThird.length > 0 &&
+              selectedThird.map((coin, index) => {
+                return <CoinDetails key={index} data={coin} />;
+              })}
+            {selectedFourth.length > 0 &&
+              selectedFourth.map((coin, index) => {
+                return <CoinDetails key={index} data={coin} />;
+              })}
           </div>
         )}
       </div>

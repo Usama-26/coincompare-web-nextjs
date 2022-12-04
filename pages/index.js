@@ -6,6 +6,7 @@ import CoinTable from "./components/section-components/CoinTable";
 import Hero from "./components/section-components/Hero";
 import { ThemeProvider } from "@material-tailwind/react";
 import Compare from "./Compare";
+import CurrencyInfo from "./CurrencyInfo";
 
 export default function Home() {
   useEffect(() => {
@@ -35,10 +36,11 @@ export default function Home() {
           <div id="page" className="bg-body">
             <Header />
 
-            <Compare />
+            {/* <Compare /> */}
             {/* <Hero />
 
             <CoinTable /> */}
+            <CurrencyInfo />
           </div>
         </CoinMarketProvider>
       </ThemeProvider>
