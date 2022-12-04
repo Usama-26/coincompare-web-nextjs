@@ -96,7 +96,9 @@ export default function CoinTable() {
                     <DataCell>${formatNum(coin.quote.USD.market_cap)}</DataCell>
                     <DataCell>${formatNum(coin.quote.USD.volume_24h)}</DataCell>
                     <DataCell>${formatNum(coin.total_supply)}</DataCell>
-                    <DataCell>{formatNum(coin.quote.USD.volume_change_24h)}%</DataCell>
+                    <DataCell isIncrement={coin.quote.USD.percent_change_7d > 0 ? true : false}>
+                      {formatNum(coin.quote.USD.volume_change_24h)}%
+                    </DataCell>
                   </TableRow>
                 );
               })}

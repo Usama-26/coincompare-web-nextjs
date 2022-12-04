@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@faker-js/faker': ^7.6.0
   '@headlessui/react': ^1.7.4
   '@heroicons/react': ^2.0.13
   '@material-tailwind/react': ^1.2.4
@@ -35,6 +36,7 @@ dependencies:
   typescript: 4.9.3
 
 devDependencies:
+  '@faker-js/faker': 7.6.0
   '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
   '@material-tailwind/react': 1.2.4_biqbaboplfbrettd7655fr4n2y
   autoprefixer: 10.4.13_postcss@8.4.19
@@ -180,6 +182,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /@faker-js/faker/7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: true
 
   /@floating-ui/core/1.0.2:
     resolution: {integrity: sha512-Skfy0YS3NJ5nV9us0uuPN0HDk1Q4edljaOhRBJGDWs9EBa7ZVMYBHRFlhLvvmwEoaIM9BlH6QJFn9/uZg0bACg==}

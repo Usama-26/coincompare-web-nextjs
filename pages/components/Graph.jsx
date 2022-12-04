@@ -12,6 +12,7 @@ const randomPoints = [
 
 const getRandomPoints = () => {
   const rndInt = Math.floor(Math.random() * 4) + 1;
+
   return randomPoints[rndInt];
 };
 
@@ -21,18 +22,18 @@ const data = {
     {
       fill: true,
       lineTension: 0.1,
-      backgroundColor: "linear-gradient(#e66465, #9198e5)",
-      borderColor: "#3773f5",
+      backgroundColor: "#8e24aa11",
+      borderColor: "#8e24aa",
       borderCapStyle: "butt",
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: "miter",
-      pointBorderColor: "#3773f5",
-      pointBackgroundColor: "#3773f5",
+      pointBorderColor: "#8e24aa",
+      pointBackgroundColor: "#8e24aa",
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#3773f5",
-      pointHoverBorderColor: "#3773f5",
+      pointHoverBackgroundColor: "#8e24aa",
+      pointHoverBorderColor: "#8e24aa",
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
