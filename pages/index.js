@@ -34,11 +34,11 @@ export default function Home() {
         <CoinMarketProvider>
           <div id="page" className="bg-body">
             <Header />
+
             <Compare />
+            {/* <Hero />
 
-            {/* <Hero /> */}
-
-            {/* <CoinTable /> */}
+            <CoinTable /> */}
           </div>
         </CoinMarketProvider>
       </ThemeProvider>

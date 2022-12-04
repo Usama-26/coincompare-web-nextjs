@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { DataCell, DataCellLeading, HeaderCell, Table, TableBody, TableHead, TableRow } from "./Table";
 import CoinDetails from "./CoinDetails";
 
-export default function CoinBox({ data, getSelectedCoin }) {
+export default function CoinSelectBox({ data, getSelectedCoin }) {
   const [selected, setSelected] = useState(undefined);
   const [query, setQuery] = useState("");
   useEffect(() => {
@@ -18,12 +18,12 @@ export default function CoinBox({ data, getSelectedCoin }) {
         );
   return (
     <>
-      <div className="w-72 mx-auto">
+      <div className="w-1/5">
         <Combobox value={selected} onChange={setSelected}>
           <div className="relative mt-1">
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
-                className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                className="w-full border-none py-2 pl-3 pr-10 text-md font-medium leading-5 text-purple-500 focus:ring-0"
                 displayValue={(coin) => (coin ? coin.name : "Select Coin")}
                 placeholder="Select Coin"
                 onChange={(event) => setQuery(event.target.value)}
@@ -48,7 +48,7 @@ export default function CoinBox({ data, getSelectedCoin }) {
                       key={coin.id}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active ? "bg-teal-600 text-white" : "text-gray-900"
+                          active ? "bg-purple-600 text-white" : "text-gray-900"
                         }`
                       }
                       value={coin}
@@ -61,7 +61,7 @@ export default function CoinBox({ data, getSelectedCoin }) {
                           {selected ? (
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                active ? "text-white" : "text-teal-600"
+                                active ? "text-white" : "text-purple-600"
                               }`}
                             >
                               <CheckIcon className="h-5 w-5" aria-hidden="true" />

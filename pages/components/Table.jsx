@@ -26,7 +26,7 @@ function HeaderCellLeading(props) {
 
 function DataCellLeading(props) {
   return (
-    <td scope="row" className="py-4 px-4 font-semibold text-purple-400 text-left whitespace-nowrap">
+    <td scope="row" className="py-4 px-4 font-semibold text-gray-200 text-left whitespace-nowrap">
       {props.children}
     </td>
   );
@@ -55,11 +55,7 @@ function TableHead(props) {
 }
 
 function TableRow(props) {
-  return (
-    <tr className="bg-white border-b dark:bg-body dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600/50">
-      {props.children}
-    </tr>
-  );
+  return <tr className="bg-body border-b border-blue-gray-800 hover:bg-blue-gray-800/50 ">{props.children}</tr>;
 }
 
 function TableHeadRow(props) {
@@ -74,7 +70,7 @@ function Table(props) {
   return (
     <div
       id="table"
-      className="container max-w-screen-2xl overflow-y-scroll h-[500px] mx-auto overflow-x-auto relative shadow-md  border border-gray-700"
+      className="container max-w-screen-2xl overflow-y-auto h-[750px] mx-auto overflow-x-auto relative shadow-md  border border-gray-700"
     >
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-4000">{props.children}</table>
     </div>
