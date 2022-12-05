@@ -5,6 +5,7 @@ import CoinSelectBox from "./components/CoinSelectBox";
 import CoinDetails from "./components/CoinDetails";
 import { DataCellLeading, HeaderCellLeading, Table, TableBody, TableHead, TableRow } from "./components/Table";
 import { Tooltip } from "flowbite-react";
+import { useRouter } from "next/router";
 
 function Compare() {
   let { getTopTenCoins } = useContext(CoinMarketContext);
@@ -15,7 +16,9 @@ function Compare() {
   let [selectedFourth, setSelectedFourth] = useState([]);
   let [showThird, setShowThird] = useState(false);
   let [showFourth, setShowFourth] = useState(false);
-
+  // const compareRouter = useRouter();
+  // const routeName = compareRouter.query.Compare;
+  // console.log(routeName);
   // ##### FAULTY CODE ##### //
   // let [comboBoxArray, setComboBoxArray] = useState([0, 1]);
   // let [selected, setSelected] = useState([]);
@@ -82,7 +85,7 @@ function Compare() {
             />
           )}
 
-          <Tooltip content="Add Coin to Compare">
+          <Tooltip content="Add Coin to Compare" arrow={false}>
             <Button
               variant="gradient"
               color="purple"
@@ -109,7 +112,7 @@ function Compare() {
               </span>
             </Button>
           </Tooltip>
-          <Tooltip content="Add Coin to Compare">
+          <Tooltip content="Add Coin to Compare" arrow={false}>
             <Button
               variant="gradient"
               color="purple"

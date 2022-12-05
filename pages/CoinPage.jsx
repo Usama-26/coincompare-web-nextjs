@@ -1,18 +1,66 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+// import { CoinMarketContext } from "../context/context";
 import Graph from "./components/Graph";
 
-export default function CurrencyInfo() {
-  const groupButtonStyles =
-    "py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-blue-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-gray-600 dark:focus:ring-blue-500 dark:focus:text-white";
-  const converterInputStyles =
-    "rounded-none rounded-r-lg bg-blue-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-blue-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+const groupButtonStyles =
+  "py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-blue-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-gray-600 dark:focus:ring-blue-500 dark:focus:text-white";
+const converterInputStyles =
+  "rounded-none rounded-r-lg bg-blue-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-blue-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+
+export default function CoinPage() {
+  // let { getTopTenCoins } = useContext(CoinMarketContext);
+  let [coinData, setCoinData] = useState([]);
+  let [activeCoin, setActiveCoin] = useState([]);
+  let [coinName, setCoinName] = useState("");
+  const coinPageRouter = useRouter();
+  const coin = coinPageRouter.query.CoinPage;
+
+  const getURLData = async () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    setCoinName(urlParams.get("name"));
+  };
+  console.log("Coin Active: ", activeCoin);
+  const getCoinData = async () => {
+    try {
+      const res = await fetch("/api/getTopTen");
+      const data = await res.json();
+      return data.data.data;
+    } catch (e) {
+      console.log("Error", e.message);
+    }
+  };
+
+  console.log(coinData);
+  useEffect(() => {
+    const getCoinJSON = async () => {
+      const data = await getCoinData();
+      const selected = data.find((coin) => coin.name === coinName);
+      setActiveCoin(selected);
+    };
+    getURLData();
+    getCoinJSON();
+  }, []);
+  // useEffect(() => {
+  //   const getJSON = async function () {
+  //     try {
+  //       let apiResponse = await getTopTenCoins();
+  //       setCoinData(apiResponse);
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   };
+  //   if (getTopTenCoins) getJSON();
+  // }, [getTopTenCoins]);
+  // console.log(coin);
 
   return (
     <main className="container mx-auto my-10 flex items-center justify-between text-gray-100">
       <div id="leftBox" className="basis-4/6 p-4">
         <div className="flex justify-between items-center text-3xl font-bold my-4">
           <h1>
-            Ethereum Price Chart <span className="uppercase mx-4">(ETH/USD)</span>
+            Ethereum Price Chart <span className="uppercase mx-4">{`(/USD)`}</span>
           </h1>
           <h1>
             <span>$1,297.63</span>

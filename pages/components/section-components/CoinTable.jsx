@@ -12,6 +12,7 @@ import {
   Table,
 } from "./../Table";
 import Link from "next/link";
+import { useRouter } from "next/router";
 export const formatNum = (num) => {
   return Number(num?.toFixed(2)).toLocaleString();
 };
@@ -33,6 +34,14 @@ export default function CoinTable() {
 
     return { isIncrement, value: formatNum(coinData[value].quote.USD.price) };
   };
+
+  const router = useRouter();
+
+  const viewCoinDetails = (e) => {
+    console.log(e.target.innerText);
+    router.push(`./../../CoinPage?name=${e.target.innerText}`);
+  };
+
   useEffect(() => {
     const getJSON = async function () {
       try {
@@ -56,7 +65,7 @@ export default function CoinTable() {
 
   return (
     <section className="text-gray-100 bg-body">
-      <div className="containermx-auto flex py-20 md:flex-row flex-col items-center">
+      <div className="container mx-auto flex py-20 md:flex-row flex-col items-center">
         {
           <Table>
             <TableHead>
@@ -79,9 +88,10 @@ export default function CoinTable() {
                     <DataCell>{coin.cmc_rank}</DataCell>
                     <DataCellLeading>
                       <span>
-                        <Link href={"/"} className="hover:text-purple-400">
+                        {/* <Link href={`/${coin.symbol}`} className="hover:text-purple-400"></Link> */}
+                        <button onClick={viewCoinDetails} className="hover:text-purple-400">
                           {coin.name}
-                        </Link>
+                        </button>
                         &nbsp;
                         <i className=" not-italic text-gray-600 text-xs">{coin.symbol}</i>
                       </span>
