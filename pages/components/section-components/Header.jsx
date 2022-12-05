@@ -7,9 +7,9 @@ import Link from "next/link";
 const navList = (
   <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
-      <a to="/" className="flex items-center">
+      <Link href="/" className="flex items-center">
         Home
-      </a>
+      </Link>
     </Typography>
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
       <a href="/swap" className="flex items-center">
@@ -33,11 +33,6 @@ export default function Header() {
           <div className="hidden lg:block">{navList}</div>
         </div>
         <div className="flex gap-16">
-          <Link href={"/comparecoin"}>
-            <Button variant="gradient" color="purple" size="md" className="hidden lg:inline-block capitalize ">
-              <span>Compare</span>
-            </Button>
-          </Link>
           <div className="flex gap-4">
             <Button
               variant="outlined"
@@ -48,7 +43,7 @@ export default function Header() {
               <span>Login</span>
             </Button>
             <Button variant="filled" color="purple" size="sm" className="hidden lg:inline-block capitalize">
-              <span>Get Started</span>
+              <span>Sign up</span>
             </Button>
           </div>
         </div>

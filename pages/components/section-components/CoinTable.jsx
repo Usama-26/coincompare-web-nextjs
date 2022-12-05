@@ -12,7 +12,6 @@ import {
   Table,
 } from "./../Table";
 import Link from "next/link";
-import { useRouter } from "next/router";
 export const formatNum = (num) => {
   return Number(num?.toFixed(2)).toLocaleString();
 };
@@ -35,13 +34,6 @@ export default function CoinTable() {
     return { isIncrement, value: formatNum(coinData[value].quote.USD.price) };
   };
 
-  const router = useRouter();
-
-  const viewCoinDetails = (e) => {
-    console.log(e.target.innerText);
-    router.push(`./../../CoinPage?name=${e.target.innerText}`);
-  };
-
   useEffect(() => {
     const getJSON = async function () {
       try {
@@ -59,6 +51,10 @@ export default function CoinTable() {
       getJSON();
     }, 20 * 1000);
   }, []);
+  const handleCoinNav = (coin) => {
+    console.log(coin);
+    localStorage.setItem("coinData", JSON.stringify(coin));
+  };
   useEffect(() => {
     coinsdata.current = coinData;
   }, [coinData]);
@@ -88,10 +84,9 @@ export default function CoinTable() {
                     <DataCell>{coin.cmc_rank}</DataCell>
                     <DataCellLeading>
                       <span>
-                        {/* <Link href={`/${coin.symbol}`} className="hover:text-purple-400"></Link> */}
-                        <button onClick={viewCoinDetails} className="hover:text-purple-400">
+                        <Link href={coin.name} onClick={(e) => handleCoinNav(coin)} className="hover:text-purple-400">
                           {coin.name}
-                        </button>
+                        </Link>
                         &nbsp;
                         <i className=" not-italic text-gray-600 text-xs">{coin.symbol}</i>
                       </span>

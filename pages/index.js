@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import { CoinMarketProvider } from "../context/context";
 import { useEffect } from "react";
 import Header from "./components/section-components/Header";
@@ -6,8 +5,7 @@ import CoinTable from "./components/section-components/CoinTable";
 import Hero from "./components/section-components/Hero";
 import { ThemeProvider } from "@material-tailwind/react";
 import Compare from "./Compare";
-import Footer from "./components/Footer";
-import CoinPage from "./CoinPage";
+import Footer from "./components/section-components/Footer";
 
 export default function Home() {
   useEffect(() => {
@@ -41,7 +39,6 @@ export default function Home() {
 
             <CoinTable />
             <Compare />
-            <CoinPage />
             <Footer />
           </div>
         </CoinMarketProvider>

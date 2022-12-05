@@ -24,7 +24,7 @@ export default function CoinSelectBox({ data, getSelectedCoin }) {
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2 pl-3 pr-10 text-md font-medium leading-5 text-purple-500 focus:ring-0"
-                displayValue={(coin) => (coin ? coin.name : "Select Coin")}
+                displayValue={(coin) => (coin ? `${coin.name} ${coin.symbol} ` : "Select Coin")}
                 placeholder="Select Coin"
                 onChange={(event) => setQuery(event.target.value)}
               />
@@ -56,7 +56,7 @@ export default function CoinSelectBox({ data, getSelectedCoin }) {
                       {({ selected, active }) => (
                         <>
                           <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                            {coin.name}
+                            {coin.name} {coin.symbol}
                           </span>
                           {selected ? (
                             <span
