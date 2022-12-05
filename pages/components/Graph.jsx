@@ -1,7 +1,7 @@
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-
+import { faker } from "@faker-js/faker";
 const randomPoints = [
   [65, 59, 100, 80, 10, 56, 72, 45, 67, 55, 42],
   [10, 50, 30, 84, 38, 90, 42, 77, 100, 0, 100],

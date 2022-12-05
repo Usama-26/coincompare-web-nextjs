@@ -53,7 +53,7 @@ function Compare() {
   return (
     <section id="compareCoin" className="text-gray-100">
       <div className="container mx-auto pt-16 flex justify-center">
-        <h1 className="capitalize mx-auto text-4xl font-bold p-4 border-b-4 border-purple-500 ">compare</h1>
+        <h1 className="capitalize mx-auto text-4xl font-bold p-4 border-b-4 border-purple-500 ">compare coins</h1>
       </div>
       <div className="container mx-auto">
         <div className="mx-auto flex px-10 py-24 md:flex-row flex-wrap gap-6 justify-center items-center ">
@@ -147,6 +147,9 @@ function Compare() {
               <TableBody>
                 <TableRow>
                   <DataCellLeading>Price</DataCellLeading>
+                </TableRow>
+                <TableRow>
+                  <DataCellLeading>Market Cap Rank</DataCellLeading>
                 </TableRow>
                 <TableRow>
                   <DataCellLeading>Market Cap</DataCellLeading>

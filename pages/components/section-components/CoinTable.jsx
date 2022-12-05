@@ -49,7 +49,7 @@ export default function CoinTable() {
 
     const time = setInterval(() => {
       getJSON();
-    }, 20 * 1000);
+    }, 60 * 1000);
   }, []);
   const handleCoinNav = (coin) => {
     console.log(coin);

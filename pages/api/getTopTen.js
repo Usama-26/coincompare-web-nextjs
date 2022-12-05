@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-process.env.NEXT_BACKEND_CMC_API_KEY = "f3118b41-f048-485c-afbb-113625cd9232";
+process.env.NEXT_BACKEND_CMC_API_KEY = "640cb9cf-64ef-42e0-894c-35aa3f280d62";
 
 export default function handler(req, res) {
   const getData = async () => {

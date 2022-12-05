@@ -12,8 +12,8 @@ const navList = (
       </Link>
     </Typography>
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
-      <a href="/swap" className="flex items-center">
-        Swap
+      <a href="/add-coin" className="flex items-center">
+        Add Coin
       </a>
     </Typography>
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
@@ -33,6 +33,14 @@ export default function Header() {
           <div className="hidden lg:block">{navList}</div>
         </div>
         <div className="flex gap-16">
+          <Button
+            variant="outlined"
+            color="gray"
+            size="sm"
+            className="hidden hover:bg-blue-gray-700/50 hover:text-white lg:inline-block capitalize"
+          >
+            <span>Wallet</span>
+          </Button>
           <div className="flex gap-4">
             <Button
               variant="outlined"

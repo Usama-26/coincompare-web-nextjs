@@ -1,11 +1,56 @@
-import { BarElement } from "chart.js";
 import Image from "next/image";
-import { Chart } from "react-chartjs-2";
-import { Bar } from "react-chartjs-2";
+import { useContext, useEffect, useState } from "react";
+import { CoinMarketContext } from "../../../context/context";
 import HeroInput from "../HeroInput";
 import heroImg from "./../../../assets/img/hero-img.svg";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useRouter } from "next/router";
 
 function Hero() {
+  const { getTopTenCoins } = useContext(CoinMarketContext);
+  const [coinData, setCoinData] = useState([]);
+  const [filteredCoin, setFilteredCoin] = useState({});
+  const handleOnSearch = (string, results) => {
+    console.log(string, results);
+  };
+  const router = useRouter();
+  const getJSON = async function () {
+    try {
+      let apiResponse = await getTopTenCoins();
+
+      setCoinData(apiResponse);
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
+
+  const handleOnSelect = (coin) => {
+    // setFilteredCoin(coin);
+    localStorage.setItem("coinData", JSON.stringify(coin));
+    router.push(coin.slug);
+  };
+  const handleClear = () => {
+    setFilteredCoin({});
+    getJSON();
+  };
+
+  const formatResult = (coin) => {
+    return (
+      <>
+        <span style={{ display: "block", textAlign: "left" }}>{`${coin.name} ${coin.symbol}`}</span>
+      </>
+    );
+  };
+
+  useEffect(() => {
+    if (getTopTenCoins) getJSON();
+    const time = setInterval(() => {
+      getJSON();
+    }, 20 * 1000);
+  }, [router.pathname]);
+
+  console.log(coinData);
+
   return (
     <section className="text-gray-100 body-font bg-body">
       <div className="container mx-auto flex px-10 py-24 md:flex-row flex-col items-center">
@@ -18,7 +63,21 @@ function Hero() {
             Crypo is the most advanced UI kit for making the Blockchain platform. This kit comes with 4 different
             exchange page, market, wallet and many more
           </p>
-          <HeroInput />
+          <div className="w-72">
+            <ReactSearchAutocomplete
+              items={coinData}
+              fuseOptions={{ keys: ["symbol", "slug"] }}
+              resultStringKeyName="name"
+              onSelect={handleOnSelect}
+              onClear={handleClear}
+              formatResult={formatResult}
+              onSearch={handleOnSearch}
+              styling={{ zIndex: 4 }}
+              autoFocus
+              placeholder="Search Currency"
+            />
+          </div>
+          {/* <HeroInput /> */}
         </div>
         <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
           <Image src={heroImg} alt="Hero Image" />

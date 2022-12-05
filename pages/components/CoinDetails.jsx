@@ -15,6 +15,9 @@ export default function CoinDetails({ data }) {
           <DataCell>${formatNum(data?.quote?.USD?.price)}</DataCell>
         </TableRow>
         <TableRow>
+          <DataCell>#{formatNum(data?.cmc_rank)}</DataCell>
+        </TableRow>
+        <TableRow>
           <DataCell>${formatNum(data?.quote?.USD?.market_cap)}</DataCell>
         </TableRow>
         <TableRow>

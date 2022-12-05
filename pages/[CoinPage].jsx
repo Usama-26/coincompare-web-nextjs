@@ -37,6 +37,7 @@ export default function CoinPage() {
           return (
             <main key={index} className="container mx-auto my-10 flex items-center justify-between text-gray-100">
               <div id="leftBox" className="basis-4/6 p-4">
+                <span className="bg-blue-gray-700/50 p-2 rounded-md text-sm">Rank #{coin.cmc_rank}</span>
                 <div className="flex justify-between items-center text-3xl font-bold my-4">
                   <h1>
                     {coin.name} Price Chart <span className="uppercase mx-4">{`(${coin.symbol}/USD)`}</span>
@@ -45,7 +46,8 @@ export default function CoinPage() {
                     <span>${formatNum(coin.quote.USD.price)}</span>
                   </h1>
                 </div>
-                <p className=" my-2 text-sm ">Last updated {coin.last_updated}. Currency in USD.</p>
+
+                <p className=" my-2 text-sm ">Last updated {coin.last_updated}.</p>
                 <div className="flex flex-wrap justify-between my-4">
                   <div class="inline-flex rounded-md shadow-sm" role="group">
                     <button type="button" className={groupButtonStyles}>
@@ -62,7 +64,7 @@ export default function CoinPage() {
                       Trading View
                     </button>
                   </div>
-                  <div class="inline-flex rounded-md shadow-sm" role="group">
+                  <div className="inline-flex rounded-md shadow-sm" role="group">
                     <button type="button" className={groupButtonStyles}>
                       24h
                     </button>
@@ -121,7 +123,39 @@ export default function CoinPage() {
                     </tr>
                   </table>
                 </div>
+                <div className="flex gap-6 text-sm">
+                  <div className="w-5/12 mx-auto">
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span>Market Cap</span>
+                      <span>${formatNum(coin.quote.USD.market_cap)}</span>
+                    </div>
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span className="capitalize">fully diluted valuation</span>
+                      <span>${formatNum(coin.quote.USD.fully_diluted_market_cap)}</span>
+                    </div>
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span className="capitalize">market pairs</span>
+                      <span>{coin.num_market_pairs}</span>
+                    </div>
+                  </div>
+                  <div className="w-5/12 mx-auto">
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span>Max Supply</span>
+                      <span>{coin.max_supply ? `$${formatNum(coin.quote.USD.market_cap)}` : "N/A"}</span>
+                    </div>
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span className="capitalize">circulating supply</span>
+                      <span>${formatNum(coin.circulating_supply)}</span>
+                    </div>
+                    <div className="w-full flex justify-between py-3 border-b border-blue-gray-800">
+                      <span className="capitalize">total supply</span>
+                      <span>${formatNum(coin.total_supply)}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* ##### RIGHT BOX ##### */}
               <div id="rightBox" className="basis-2/6">
                 <div className="rounded-lg bg-blue-gray-700/50 p-2 mx-8">
                   <h1 className="text-xl font-bold text-gray-100 my-4">Convert {coin.name} to USD</h1>
