@@ -6,6 +6,10 @@ import Hero from "./components/section-components/Hero";
 import { ThemeProvider } from "@material-tailwind/react";
 import Compare from "./Compare";
 import Footer from "./components/section-components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginForm from "./src/pages/forms/LoginForm";
+
+const isBrowser = typeof window !== "undefined";
 
 export default function Home() {
   useEffect(() => {

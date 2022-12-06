@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar, MobileNav, Typography, Button, IconButton } from "@material-tailwind/react";
 import brandLogo from "./../../../assets/coin-compare.svg";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const navList = (
   <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -12,14 +12,14 @@ const navList = (
       </Link>
     </Typography>
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
-      <a href="/add-coin" className="flex items-center">
+      <Link href="/add-coin" className="flex items-center">
         Add Coin
-      </a>
+      </Link>
     </Typography>
     <Typography as="li" variant="small" className="p-1 text-white hover:text-purple-500 transition-colors font-normal">
-      <a href="/post-ad" className="flex items-center">
+      <Link href="/post-ad" className="flex items-center">
         Post Ad.
-      </a>
+      </Link>
     </Typography>
   </ul>
 );
@@ -39,20 +39,25 @@ export default function Header() {
             size="sm"
             className="hidden hover:bg-blue-gray-700/50 hover:text-white lg:inline-block capitalize"
           >
-            <span>Wallet</span>
+            <span>Compare</span>
           </Button>
+
           <div className="flex gap-4">
-            <Button
-              variant="outlined"
-              color="purple"
-              size="sm"
-              className="hidden lg:inline-block capitalize hover:bg-purple-500 text-white"
-            >
-              <span>Login</span>
-            </Button>
-            <Button variant="filled" color="purple" size="sm" className="hidden lg:inline-block capitalize">
-              <span>Sign up</span>
-            </Button>
+            <Link to={"/login"}>
+              <Button
+                variant="outlined"
+                color="purple"
+                size="sm"
+                className="hidden lg:inline-block capitalize hover:bg-purple-500 text-white"
+              >
+                <span>Login</span>
+              </Button>
+            </Link>
+            <Link to={"/signup"}>
+              <Button variant="filled" color="purple" size="sm" className="hidden lg:inline-block capitalize">
+                <span>Sign up</span>
+              </Button>
+            </Link>
           </div>
         </div>
         <IconButton

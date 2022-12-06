@@ -4,7 +4,7 @@ import { CoinMarketContext } from "../../../context/context";
 import HeroInput from "../HeroInput";
 import heroImg from "./../../../assets/img/hero-img.svg";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function Hero() {
   const { getTopTenCoins } = useContext(CoinMarketContext);
