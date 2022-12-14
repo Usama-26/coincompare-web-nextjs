@@ -19,6 +19,7 @@ const LoginForm = () => {
     event.preventDefault();
     console.log("abc");
     navigate("/signup");
+
     // axios
     //   .post("http://localhost:1337/api/auth/local?populate=*", {
     //     identifier: `${email}`,

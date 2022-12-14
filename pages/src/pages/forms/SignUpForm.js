@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [userName, setUserName] = useState("");
@@ -47,14 +48,14 @@ const SignUpForm = () => {
     }
   };
   return (
-    <form class="bg-grey-lighter min-h-screen flex flex-col" onSubmit={userSignUpHandler}>
-      <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+    <>
+      <div id="#Login" className="container w-full max-w-sm my-20 mx-auto">
+        <div class="bg-blue-gray-700 px-6 py-8 text-black w-full rounded-lg shadow-sm">
+          <h1 class="mb-8 text-3xl text-center capitalize text-blue-gray-100 font-bold">Sign up</h1>
 
           <input
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block border border-gray-100/50 w-full p-3 rounded mb-4 bg-blue-gray-700/50 text-blue-gray-100"
             name="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -62,31 +63,33 @@ const SignUpForm = () => {
           />
           <input
             type="text"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
+            className="block  border border-gray-100/50 w-full p-3 rounded mb-4 bg-blue-gray-700/50 text-blue-gray-100"
             name="username"
             placeholder="User Name"
             onChange={(e) => setUserName(e.target.value)}
             value={userName}
           />
 
-          <input
-            type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-          <input
-            type="password"
-            class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="confirm_password"
-            placeholder="Confirm Password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            value={confirmPassword}
-          />
+          {/* <div className="flex gap-6 w-full">
+            <input
+              type="password"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+            <input
+              type="password"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="confirm_password"
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmPassword}
+            />
+          </div> */}
 
-          <input
+          {/* <input
             class="block border border-grey-light w-full p-3 rounded mb-4"
             aria-describedby="user_avatar_help"
             id="user_avatar"
@@ -97,9 +100,9 @@ const SignUpForm = () => {
               setImageName(e.target.value);
             }}
             value={imageName}
-          />
+          /> */}
 
-          <input
+          {/* <input
             type="text"
             class="block border border-grey-light w-full p-3 rounded mb-4"
             name="country"
@@ -114,36 +117,17 @@ const SignUpForm = () => {
             placeholder="contact"
             onChange={(e) => setContact(e.target.value)}
             value={contact}
-          />
+          /> */}
 
           <button
             type="submit"
-            class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            class="flex mx-auto text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded-full text-lg"
           >
             Submit
           </button>
-
-          <div class="text-center text-sm text-grey-dark mt-4">
-            By signing up, you agree to the
-            <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
-              Terms of Service
-            </a>{" "}
-            and
-            <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
-              Privacy Policy
-            </a>
-          </div>
-        </div>
-
-        <div class="text-grey-dark mt-6">
-          Already have an account?
-          <a class="no-underline border-b border-blue text-blue" href="../login/">
-            Log in
-          </a>
-          .
         </div>
       </div>
-    </form>
+    </>
   );
 };
 
