@@ -29,6 +29,11 @@ export default function CoinPage() {
     setInputUSD(JSON.parse(localStorage.getItem("coinData"))?.quote?.USD?.price.toFixed(2));
   }, []);
 
+  function formatDate(date) {
+    const DateInSeconds = Date.parse(date);
+    return `${new Date(DateInSeconds).toLocaleDateString()} ${new Date(DateInSeconds).toLocaleTimeString()}`;
+  }
+
   return (
     <div>
       <Header />
@@ -47,7 +52,7 @@ export default function CoinPage() {
                   </h1>
                 </div>
 
-                <p className=" my-2 text-sm ">Last updated {coin.last_updated}.</p>
+                <p className=" my-2 text-sm ">Last updated {formatDate(coin.last_updated)}.</p>
                 <div className="flex flex-wrap justify-between my-4">
                   <div class="inline-flex rounded-md shadow-sm" role="group">
                     <button type="button" className={groupButtonStyles}>

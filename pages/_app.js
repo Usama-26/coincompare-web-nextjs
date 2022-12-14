@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -16,12 +16,11 @@ import UserHome from "./src/pages/home/UserHome";
 import List from "./src/pages/list/List";
 import UserAdList from "./src/pages/list/UserAdList";
 import UserList from "./src/pages/list/UserList";
-const isBrowser = typeof window !== "undefined";
-function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    console.log(pageProps);
 
-    console.log(Component);
+function MyApp({ Component, pageProps }) {
+  const [isBrowser, setIsBrowser] = useState(null);
+  useEffect(() => {
+    setIsBrowser(true);
   }, []);
 
   return (
@@ -29,7 +28,8 @@ function MyApp({ Component, pageProps }) {
       {isBrowser && (
         <BrowserRouter>
           <Routes>
-            <Route path="/admin" index element={<Home />}></Route>
+            <Route path="/" index element={<Component {...pageProps} />} />
+            <Route path="/admin" element={<Home />}></Route>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignUpForm />} />
             <Route path="/userhome" element={<UserHome />} />
@@ -43,7 +43,6 @@ function MyApp({ Component, pageProps }) {
             <Route path="/profile" element={<DisplayProfile />} />
             <Route path="/editprofile" element={<EditProfileForm />} />
           </Routes>
-          <Component {...pageProps} />
         </BrowserRouter>
       )}
     </>

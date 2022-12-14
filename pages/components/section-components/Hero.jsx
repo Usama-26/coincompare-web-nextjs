@@ -25,7 +25,6 @@ function Hero() {
   };
 
   const handleOnSelect = (coin) => {
-    // setFilteredCoin(coin);
     localStorage.setItem("coinData", JSON.stringify(coin));
     router.push(coin.slug);
   };
@@ -49,8 +48,6 @@ function Hero() {
     }, 20 * 1000);
   }, [router.pathname]);
 
-  console.log(coinData);
-
   return (
     <section className="text-gray-100 body-font bg-body">
       <div className="container mx-auto flex px-10 py-24 md:flex-row flex-col items-center">
@@ -63,6 +60,7 @@ function Hero() {
             Crypo is the most advanced UI kit for making the Blockchain platform. This kit comes with 4 different
             exchange page, market, wallet and many more
           </p>
+
           <div className="w-72">
             <ReactSearchAutocomplete
               items={coinData}
